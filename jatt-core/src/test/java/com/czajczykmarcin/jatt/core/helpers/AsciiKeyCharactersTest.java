@@ -67,7 +67,7 @@ public class AsciiKeyCharactersTest {
 
     private void run(KeyCharacters keyCharacters, int number, String name) {
         long startTime = System.currentTimeMillis();
-        for (int i = 0; i < 1_000_000_000; i++) {
+        for (int i = 0; i < 1_000_000; i++) {
             keyCharacters.contains(number);
         }
         System.out.println(name + " [" + number + "] - " + (System.currentTimeMillis()-startTime) + " ms");

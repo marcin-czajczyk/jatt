@@ -1,6 +1,7 @@
 package com.czajczykmarcin.jatt.core.context;
 
 import com.czajczykmarcin.jatt.core.KeyCharacters;
+import com.czajczykmarcin.jatt.core.ProcessContext;
 import com.czajczykmarcin.jatt.core.helpers.Counter;
 import com.czajczykmarcin.jatt.core.helpers.Result;
 import com.czajczykmarcin.jatt.core.request.CaseMode;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Getter
-public class ProcessContext {
+public class ProcessContextSet implements ProcessContext {
 
     private final KeyCharacters keyCharacters;
     private final CaseMode caseMode;
@@ -22,7 +23,7 @@ public class ProcessContext {
 
     private final Map<Integer, Result> resultByCharacter;
 
-    public ProcessContext(KeyCharacters keyCharacters, CaseMode caseMode) {
+    public ProcessContextSet(KeyCharacters keyCharacters, CaseMode caseMode) {
         this.keyCharacters = keyCharacters;
         this.caseMode = caseMode;
         this.countByKeyCharacter = keyCharacters.createCounterMap();
