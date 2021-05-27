@@ -1,10 +1,10 @@
 package com.czajczykmarcin.jatt.core.response;
 
 import com.czajczykmarcin.jatt.core.Response;
-
-import java.util.ArrayList;
+import lombok.Getter;
 import java.util.List;
 
+@Getter
 public class ResponseImpl implements Response {
 
     private final List<Occurrence> occurrences;
@@ -15,21 +15,6 @@ public class ResponseImpl implements Response {
         this.occurrences = occurrences;
         this.totalCount = totalCount;
         this.keyCharactersTotalCount = keyCharactersTotalCount;
-    }
-
-    @Override
-    public List<Occurrence> getOccurrences() {
-        return occurrences;
-    }
-
-    @Override
-    public long getTotalCount() {
-        return totalCount;
-    }
-
-    @Override
-    public long getKeyCharactersTotalCount() {
-        return keyCharactersTotalCount;
     }
 
     @Override

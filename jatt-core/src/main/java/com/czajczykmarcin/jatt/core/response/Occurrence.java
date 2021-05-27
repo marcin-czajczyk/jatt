@@ -1,5 +1,8 @@
 package com.czajczykmarcin.jatt.core.response;
 
+import lombok.Getter;
+
+@Getter
 public class Occurrence {
 
     private final String key;
@@ -12,15 +15,4 @@ public class Occurrence {
         this.keyCharactersCount = keyCharactersCount;
     }
 
-    public String getKey() {
-        return key;
-    }
-
-    public long getWordSize() {
-        return wordSize;
-    }
-
-    public long getKeyCharactersCount() {
-        return keyCharactersCount;
-    }
 }

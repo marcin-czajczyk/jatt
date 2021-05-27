@@ -5,7 +5,6 @@ import com.czajczykmarcin.jatt.core.Request;
 import com.czajczykmarcin.jatt.core.Response;
 import com.czajczykmarcin.jatt.core.context.ProcessContextOne;
 import com.czajczykmarcin.jatt.core.exceptions.UnsupportedKeyCharacters;
-import com.czajczykmarcin.jatt.core.helpers.Result;
 import com.czajczykmarcin.jatt.core.request.CaseMode;
 import com.czajczykmarcin.jatt.core.response.Occurrence;
 import com.czajczykmarcin.jatt.core.response.ResponseImpl;
@@ -50,7 +49,7 @@ public class SimpleAsciiFrequencyAnalyzerOne extends AsciiFrequencyAnalyzer<Proc
     @Override
     protected Response createResponse(ProcessContextOne pc) {
         List<Occurrence> occurrences = new ArrayList<>();
-        Result result = pc.getResult();
+        var result = pc.getResult();
         if (result.getCountByWordSize() != null) {
             result.getCountByWordSize()
                     .entrySet()
@@ -64,7 +63,7 @@ public class SimpleAsciiFrequencyAnalyzerOne extends AsciiFrequencyAnalyzer<Proc
     private void storeWord(final ProcessContextOne pc) {
         if (pc.getKeyCharacterCounter().isNonZero()) {
             pc.getResult()
-                    .addKeyCharactersCount(pc.getWordSize().clone(), pc.getKeyCharacterCounter().clone());
+                    .addKeyCharactersCount(pc.getWordSize().createCopy(), pc.getKeyCharacterCounter().createCopy());
             pc.getTotalKeyCharacterCounter()
                     .add(pc.getKeyCharacterCounter());
             pc.getKeyCharacterCounter()

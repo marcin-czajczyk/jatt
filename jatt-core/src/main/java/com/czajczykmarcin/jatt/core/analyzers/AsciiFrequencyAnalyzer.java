@@ -4,12 +4,12 @@ import com.czajczykmarcin.jatt.core.*;
 import com.czajczykmarcin.jatt.core.exceptions.IllegalCharacter;
 import com.czajczykmarcin.jatt.core.request.CaseMode;
 
-public abstract class AsciiFrequencyAnalyzer<PC extends ProcessContext> implements FrequencyAnalyzer<Request<String, String>> {
+public abstract class AsciiFrequencyAnalyzer<P extends ProcessContext> implements FrequencyAnalyzer<Request<String, String>> {
 
     @Override
     public Response analyse(final KeyCharacters keyCharacters, final Request<String, String> request) {
         validate(keyCharacters, request);
-        PC processContext = createProcessContext(keyCharacters, request.getCaseMode());
+        var processContext = createProcessContext(keyCharacters, request.getCaseMode());
         request.getInput()
                 .codePoints()
                 .forEach(character -> process(processContext, character));
@@ -18,12 +18,11 @@ public abstract class AsciiFrequencyAnalyzer<PC extends ProcessContext> implemen
     }
 
     protected void validate(KeyCharacters keyCharacters, Request<String, String> request) {
-
     }
 
-    protected abstract PC createProcessContext(final KeyCharacters keyCharacters, CaseMode caseMode);
+    protected abstract P createProcessContext(final KeyCharacters keyCharacters, CaseMode caseMode);
 
-    protected void process(final PC processContext, final int character) {
+    protected void process(final P processContext, final int character) {
         if (character > 127) {
             throw new IllegalCharacter(Character.toString(character));
         }
@@ -36,10 +35,10 @@ public abstract class AsciiFrequencyAnalyzer<PC extends ProcessContext> implemen
         }
     }
 
-    protected abstract void processNextWord(final PC processContext);
+    protected abstract void processNextWord(final P processContext);
 
-    protected abstract void processSupportedCharacter(final PC processContext, final int character);
+    protected abstract void processSupportedCharacter(final P processContext, final int character);
 
-    protected abstract Response createResponse(PC processContext);
+    protected abstract Response createResponse(P processContext);
 
 }

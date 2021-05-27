@@ -7,4 +7,9 @@ public class IllegalCharacter extends RuntimeException {
     public IllegalCharacter(String character) {
         this.character = character;
     }
+
+    @Override
+    public String getMessage() {
+        return "IllegalCharacter '" + character + "'";
+    }
 }

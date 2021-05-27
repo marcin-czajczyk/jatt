@@ -1,6 +1,5 @@
 package com.czajczykmarcin.jatt.core.service;
 
-import com.czajczykmarcin.jatt.core.KeyCharacters;
 import com.czajczykmarcin.jatt.core.Request;
 import com.czajczykmarcin.jatt.core.Response;
 import com.czajczykmarcin.jatt.core.analyzers.SimpleAsciiFrequencyAnalyzerOne;
@@ -26,7 +25,7 @@ public class FrequencyAnalyzerService {
         if (StringUtils.isEmpty(request.getInput())) {
             return EmptyResponse.INSTANCE;
         }
-        KeyCharacters keyCharacters = keyCharactersHelper.create(request.getKeyWord(), request.getCaseMode());
+        var keyCharacters = keyCharactersHelper.create(request.getKeyWord(), request.getCaseMode());
         if (keyCharacters.size() == 1) {
             return one.analyse(keyCharacters, request);
         }

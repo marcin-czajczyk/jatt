@@ -1,6 +1,6 @@
 package com.czajczykmarcin.jatt.core.helpers;
 
-public final class Counter implements Comparable<Counter>, Cloneable {
+public final class Counter implements Comparable<Counter> {
 
     private long value = 0L;
 
@@ -31,16 +31,28 @@ public final class Counter implements Comparable<Counter>, Cloneable {
         value = 0L;
     }
 
-    @Override
-    public Counter clone() {
+    public Counter createCopy() {
         return new Counter(value);
     }
 
     @Override
     public int compareTo(Counter counter) {
-        if (this == counter) {
-            return 0;
-        }
         return Long.compare(this.value, counter.value);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof Counter) {
+            return compareTo((Counter) obj) == 0;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Long.hashCode(value);
     }
 }

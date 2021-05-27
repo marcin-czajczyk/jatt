@@ -27,7 +27,7 @@ public class SimpleAsciiFrequencyAnalyzerSet extends AsciiFrequencyAnalyzer<Proc
         storeWord(processContext);
         processContext.getTotalCount().add(processContext.getWordSize());
         processContext.getWordSize().reset();
-        processContext.getCountByKeyCharacter().forEach((integer, counter) -> counter.reset());;
+        processContext.getCountByKeyCharacter().forEach((integer, counter) -> counter.reset());
     }
 
     @Override
@@ -68,7 +68,7 @@ public class SimpleAsciiFrequencyAnalyzerSet extends AsciiFrequencyAnalyzer<Proc
             }
         }
         if (result != null) {
-            result.addKeyCharactersCount(processContext.getWordSize().clone(), sum);
+            result.addKeyCharactersCount(processContext.getWordSize().createCopy(), sum);
         }
     }
 

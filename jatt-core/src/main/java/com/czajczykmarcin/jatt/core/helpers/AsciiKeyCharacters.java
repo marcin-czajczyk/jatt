@@ -104,30 +104,30 @@ class AsciiKeyCharacters {
 
     static final class Set implements KeyCharacters {
 
-        private final java.util.Set<Integer> set;
+        private final java.util.Set<Integer> data;
 
         private final List<Integer> sortedValues;
 
-        Set(java.util.Set<Integer> set) {
-            this.set = set;
-            this.sortedValues = set.stream()
+        Set(java.util.Set<Integer> data) {
+            this.data = data;
+            this.sortedValues = data.stream()
                     .sorted()
                     .collect(Collectors.toUnmodifiableList());
         }
 
         @Override
         public int size() {
-            return set.size();
+            return data.size();
         }
 
         @Override
         public boolean contains(int input) {
-            return set.contains(input);
+            return data.contains(input);
         }
 
         @Override
         public Map<Integer, Counter> createCounterMap() {
-            return set.stream()
+            return data.stream()
                     .collect(Collectors.toUnmodifiableMap(identity(), v -> new Counter()));
         }
 
