@@ -11,7 +11,7 @@ import static java.util.function.Function.identity;
 
 class AsciiKeyCharacters {
 
-    private AsciiKeyCharacters() { }
+    private AsciiKeyCharacters() { throw new UnsupportedOperationException("Cannot create AsciiKeyCharacters instance"); }
 
     static final class Zero implements KeyCharacters {
 

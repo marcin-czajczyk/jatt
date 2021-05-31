@@ -1,2 +1,3 @@
 /jatt-core/target/
 /.idea/
+/jatt-cmd/target/classes/com/czajczykmarcin/jatt/cmd/

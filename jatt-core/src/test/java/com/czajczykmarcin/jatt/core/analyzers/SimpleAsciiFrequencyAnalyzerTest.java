@@ -19,7 +19,8 @@ public class SimpleAsciiFrequencyAnalyzerTest {
     public Object[][] testProcessDP() {
         return new Object[][] {
                 {new StringRequest("LOGIC", "I love to work in global logic!", CaseMode.LOWERCASE)},
-                {new StringRequest("L", "I love to work in global logic!", CaseMode.LOWERCASE)}
+                {new StringRequest("L", "I love to work in global logic!", CaseMode.LOWERCASE)},
+                {new StringRequest("logic", "glo gol log", CaseMode.LOWERCASE)}
         };
     }
 

@@ -17,8 +17,4 @@ public class ResponseImpl implements Response {
         this.keyCharactersTotalCount = keyCharactersTotalCount;
     }
 
-    @Override
-    public boolean isEmpty() {
-        return occurrences.isEmpty();
-    }
 }

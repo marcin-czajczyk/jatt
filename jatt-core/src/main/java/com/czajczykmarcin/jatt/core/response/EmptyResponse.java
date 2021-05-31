@@ -26,9 +26,4 @@ public class EmptyResponse implements Response {
     public long getKeyCharactersTotalCount() {
         return 0L;
     }
-
-    @Override
-    public boolean isEmpty() {
-        return true;
-    }
 }

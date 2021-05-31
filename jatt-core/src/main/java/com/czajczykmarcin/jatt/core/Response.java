@@ -12,5 +12,4 @@ public interface Response {
 
     long getKeyCharactersTotalCount();
 
-    boolean isEmpty();
 }
