@@ -13,6 +13,7 @@ public class Jatt {
         new ConsoleService(
                 DEFAULT_LOGIC_WORD,
                 DEFAULT_TEXT,
+                args,
                 new FrequencyAnalyzerService(),
                 new ConsoleImpl(System.in, System.out)
         )

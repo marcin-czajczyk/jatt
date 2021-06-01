@@ -7,7 +7,6 @@ import com.czajczykmarcin.jatt.core.request.StringRequest;
 import com.czajczykmarcin.jatt.core.response.Occurrence;
 import com.czajczykmarcin.jatt.core.service.FrequencyAnalyzerService;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -19,24 +18,19 @@ public class ConsoleService {
     private final String defaultText;
     private final FrequencyAnalyzerService analyzerService;
     private final Console console;
+    private final String[] values;
 
-    public ConsoleService(String defaultLogicWord, String defaultText, FrequencyAnalyzerService analyzerService, Console console) {
+    public ConsoleService(String defaultLogicWord, String defaultText, String[] values, FrequencyAnalyzerService analyzerService, Console console) {
         this.defaultLogicWord = defaultLogicWord;
         this.defaultText = defaultText;
+        this.values = values;
         this.analyzerService = analyzerService;
         this.console = console;
     }
 
     public void run() {
-        var logicWord = console.readLine("Please provide logic word (default: 'LOGIC'): ");
-        if (StringUtils.isEmpty(logicWord)) {
-            logicWord = defaultLogicWord;
-        }
-
-        var text = console.readLine("Please provide the text (default: 'I love to work in global logic!'): ");
-        if (StringUtils.isEmpty(text)) {
-            text = defaultText;
-        }
+        var logicWord = values.length > 0 ? values[0] : console.readLogicWord(defaultLogicWord);
+        var text = values.length > 1 ? values[1] : console.readText(defaultText);
         var response = analyzerService.process(new StringRequest(logicWord, text, CaseMode.LOWERCASE));
         console.write(toConsoleString(response));
     }

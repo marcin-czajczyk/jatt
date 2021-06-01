@@ -1,7 +1,11 @@
 package com.czajczykmarcin.jatt.cmd;
 
 public interface Console {
-    String readLine(String text);
+
+    String readLogicWord(String defaultLogicWord);
+
+    String readText(String defaultText);
 
     void write(String text);
+
 }
