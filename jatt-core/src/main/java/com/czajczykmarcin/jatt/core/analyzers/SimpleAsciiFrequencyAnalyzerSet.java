@@ -54,18 +54,21 @@ public class SimpleAsciiFrequencyAnalyzerSet extends AsciiFrequencyAnalyzer<Proc
     private void storeWord(final ProcessContextSet processContext) {
         Result result = null;
         Counter sum = null;
+        var order = 0;
         for (Integer character : processContext.getKeyCharacters().getSorted()) {
             var counter = processContext.getCountByKeyCharacter().get(character);
             if (counter.isNonZero()) {
                 if (result == null) {
-                    result = processContext.getResultByCharacter().computeIfAbsent(character, c -> new Result(String.valueOf(Character.toChars(c))));
+                    int o = order;
+                    result = processContext.getResultByCharacter().computeIfAbsent(character, c -> new Result(String.valueOf(Character.toChars(c)), o));
                     sum = new Counter(counter.get());
                 }
                 else {
-                    result = result.getSubResult(character);
+                    result = result.getSubResult(character, order);
                     sum.add(counter);
                 }
             }
+            order++;
         }
         if (result != null) {
             result.addKeyCharactersCount(processContext.getWordSize().createCopy(), sum);
@@ -81,7 +84,7 @@ public class SimpleAsciiFrequencyAnalyzerSet extends AsciiFrequencyAnalyzer<Proc
                     .entrySet()
                     .stream()
                     .sorted(Map.Entry.comparingByKey())
-                    .forEach(entry -> occurrences.add(new Occurrence(result.getKey(), entry.getKey().get(), entry.getValue().get())));
+                    .forEach(entry -> occurrences.add(new Occurrence(result.getKey(), result.getOrder(), entry.getKey().get(), entry.getValue().get())));
         }
         if (result.getSubResultByCharacter() != null) {
             for (Integer character : sortedCharacters) {

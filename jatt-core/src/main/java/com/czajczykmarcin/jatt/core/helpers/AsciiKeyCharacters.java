@@ -1,12 +1,15 @@
 package com.czajczykmarcin.jatt.core.helpers;
 
 import com.czajczykmarcin.jatt.core.KeyCharacters;
+import com.czajczykmarcin.jatt.core.request.CharacterOrder;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.czajczykmarcin.jatt.core.util.CharacterUtil.sort;
 import static java.util.function.Function.identity;
 
 class AsciiKeyCharacters {
@@ -75,10 +78,10 @@ class AsciiKeyCharacters {
 
         private final List<Integer> sortedValues;
 
-        Two(int value1, int value2) {
+        Two(int value1, int value2, CharacterOrder characterOrder) {
             this.value1 = value1;
             this.value2 = value2;
-            this.sortedValues = value1 < value2 ? List.of(value1, value2) : List.of(value2, value1);
+            this.sortedValues = sort(value1, value2, characterOrder);
         }
 
         @Override
@@ -108,11 +111,9 @@ class AsciiKeyCharacters {
 
         private final List<Integer> sortedValues;
 
-        Set(java.util.Set<Integer> data) {
-            this.data = data;
-            this.sortedValues = data.stream()
-                    .sorted()
-                    .collect(Collectors.toUnmodifiableList());
+        Set(List<Integer> data, CharacterOrder characterOrder) {
+            this.data = new HashSet<>(data);
+            this.sortedValues = sort(data, characterOrder);
         }
 
         @Override

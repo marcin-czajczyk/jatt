@@ -2,17 +2,17 @@ package com.czajczykmarcin.jatt.core.helpers;
 
 import com.czajczykmarcin.jatt.core.KeyCharacters;
 import com.czajczykmarcin.jatt.core.request.CaseMode;
+import com.czajczykmarcin.jatt.core.request.CharacterOrder;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.czajczykmarcin.jatt.core.util.CharacterUtil.caseConverter;
 
 public class AsciiKeyCharactersHelper {
 
-    public KeyCharacters create(final String keyWord, final CaseMode mode) {
+    public KeyCharacters create(final String keyWord, final CaseMode mode, CharacterOrder characterOrder) {
         int[] characters = keyWord.codePoints().toArray();
         if (characters.length == 0) {
             return new AsciiKeyCharacters.Zero();
@@ -26,13 +26,14 @@ public class AsciiKeyCharactersHelper {
             if (characters[0] == characters[1]) {
                 return new AsciiKeyCharacters.One(characters[0]);
             }
-            return new AsciiKeyCharacters.Two(characters[0], characters[1]);
+            return new AsciiKeyCharacters.Two(characters[0], characters[1], characterOrder);
         }
-        Set<Integer> set = Arrays.stream(characters)
+        List<Integer> values = Arrays.stream(characters)
                 .map(i -> caseConverter(i,mode))
                 .boxed()
-                .collect(Collectors.toCollection(HashSet::new));
-        return new AsciiKeyCharacters.Set(set);
+                .distinct()
+                .collect(Collectors.toList());
+        return new AsciiKeyCharacters.Set(values, characterOrder);
     }
 
 }

@@ -55,7 +55,7 @@ public class SimpleAsciiFrequencyAnalyzerOne extends AsciiFrequencyAnalyzer<Proc
                     .entrySet()
                     .stream()
                     .sorted(Map.Entry.comparingByKey())
-                    .forEach(entry -> occurrences.add(new Occurrence(result.getKey(), entry.getKey().get(), entry.getValue().get())));
+                    .forEach(entry -> occurrences.add(new Occurrence(result.getKey(), result.getOrder(), entry.getKey().get(), entry.getValue().get())));
         }
         return new ResponseImpl(occurrences, pc.getTotalCounter().get(), pc.getTotalKeyCharacterCounter().get());
     }

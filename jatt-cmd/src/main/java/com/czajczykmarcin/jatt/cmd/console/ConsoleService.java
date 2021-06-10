@@ -3,6 +3,7 @@ package com.czajczykmarcin.jatt.cmd.console;
 import com.czajczykmarcin.jatt.cmd.Console;
 import com.czajczykmarcin.jatt.core.Response;
 import com.czajczykmarcin.jatt.core.request.CaseMode;
+import com.czajczykmarcin.jatt.core.request.CharacterOrder;
 import com.czajczykmarcin.jatt.core.request.StringRequest;
 import com.czajczykmarcin.jatt.core.response.Occurrence;
 import com.czajczykmarcin.jatt.core.service.FrequencyAnalyzerService;
@@ -31,7 +32,7 @@ public class ConsoleService {
     public void run() {
         var logicWord = values.length > 0 ? values[0] : console.readLogicWord(defaultLogicWord);
         var text = values.length > 1 ? values[1] : console.readText(defaultText);
-        var response = analyzerService.process(new StringRequest(logicWord, text, CaseMode.LOWERCASE));
+        var response = analyzerService.process(new StringRequest(logicWord, text, CaseMode.LOWERCASE, CharacterOrder.INPUT));
         console.write(toConsoleString(response));
     }
 
@@ -42,7 +43,7 @@ public class ConsoleService {
                 .stream()
                 .sorted(Comparator.comparing(Occurrence::getKeyCharactersCount)
                         .thenComparing(Occurrence::getKeyLength)
-                        .thenComparing(Occurrence::getKey)
+                        .thenComparing(Occurrence::getOrder)
                         .thenComparing(Occurrence::getWordSize)
                 )
                 .forEach(o -> toConsoleString(sb, o, response.getKeyCharactersTotalCount()) );

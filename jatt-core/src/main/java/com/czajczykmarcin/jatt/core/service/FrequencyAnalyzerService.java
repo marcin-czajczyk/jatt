@@ -25,7 +25,7 @@ public class FrequencyAnalyzerService {
         if (StringUtils.isEmpty(request.getInput())) {
             return EmptyResponse.INSTANCE;
         }
-        var keyCharacters = keyCharactersHelper.create(request.getKeyWord(), request.getCaseMode());
+        var keyCharacters = keyCharactersHelper.create(request.getKeyWord(), request.getCaseMode(), request.getCharacterOrder());
         if (keyCharacters.size() == 1) {
             return one.analyse(keyCharacters, request);
         }

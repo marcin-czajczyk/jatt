@@ -1,31 +1,21 @@
 package com.czajczykmarcin.jatt.core.request;
 
 import com.czajczykmarcin.jatt.core.Request;
+import lombok.Getter;
 
+@Getter
 public class StringRequest implements Request<String, String> {
 
     private final String keyWord;
     private final String input;
     private final CaseMode caseMode;
+    private final CharacterOrder characterOrder;
 
-    public StringRequest(String keyWord, String input, CaseMode caseMode) {
+    public StringRequest(String keyWord, String input, CaseMode caseMode, CharacterOrder characterOrder) {
         this.keyWord = keyWord;
         this.input = input;
         this.caseMode = caseMode;
-    }
+        this.characterOrder = characterOrder;
 
-    @Override
-    public String getKeyWord() {
-        return keyWord;
-    }
-
-    @Override
-    public String getInput() {
-        return input;
-    }
-
-    @Override
-    public CaseMode getCaseMode() {
-        return caseMode;
     }
 }

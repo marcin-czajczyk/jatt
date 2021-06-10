@@ -22,7 +22,7 @@ public class ProcessContextOne implements ProcessContext {
     public ProcessContextOne(int keyCharacter, CaseMode caseMode) {
         this.keyCharacter = keyCharacter;
         this.caseMode = caseMode;
-        this.result = new Result(String.valueOf(Character.toChars(keyCharacter)));
+        this.result = new Result(String.valueOf(Character.toChars(keyCharacter)), 0);
     }
 
 }
