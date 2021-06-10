@@ -32,7 +32,7 @@ public class ConsoleService {
     public void run() {
         var logicWord = values.length > 0 ? values[0] : console.readLogicWord(defaultLogicWord);
         var text = values.length > 1 ? values[1] : console.readText(defaultText);
-        var response = analyzerService.process(new StringRequest(logicWord, text, CaseMode.LOWERCASE, CharacterOrder.INPUT));
+        var response = analyzerService.processAscii(new StringRequest(logicWord, text, CaseMode.LOWERCASE, CharacterOrder.INPUT));
         console.write(toConsoleString(response));
     }
 

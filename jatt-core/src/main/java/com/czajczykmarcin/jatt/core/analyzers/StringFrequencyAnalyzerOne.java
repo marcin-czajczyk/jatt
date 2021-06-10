@@ -1,5 +1,6 @@
 package com.czajczykmarcin.jatt.core.analyzers;
 
+import com.czajczykmarcin.jatt.core.CharacterAnalyzer;
 import com.czajczykmarcin.jatt.core.KeyCharacters;
 import com.czajczykmarcin.jatt.core.Request;
 import com.czajczykmarcin.jatt.core.Response;
@@ -12,10 +13,18 @@ import com.czajczykmarcin.jatt.core.response.ResponseImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.czajczykmarcin.jatt.core.util.CharacterUtil.caseConverter;
+import static java.util.Objects.requireNonNull;
 
-public class SimpleAsciiFrequencyAnalyzerOne extends AsciiFrequencyAnalyzer<ProcessContextOne> {
+public class StringFrequencyAnalyzerOne extends AbstractFrequencyAnalyzer<ProcessContextOne> {
+
+    private final CharacterAnalyzer characterAnalyzer;
+
+    public StringFrequencyAnalyzerOne(CharacterAnalyzer characterAnalyzer) {
+        this.characterAnalyzer = requireNonNull(characterAnalyzer);
+    }
 
     @Override
     protected void validate(KeyCharacters keyCharacters, Request<String, String> request) {
@@ -58,6 +67,11 @@ public class SimpleAsciiFrequencyAnalyzerOne extends AsciiFrequencyAnalyzer<Proc
                     .forEach(entry -> occurrences.add(new Occurrence(result.getKey(), result.getOrder(), entry.getKey().get(), entry.getValue().get())));
         }
         return new ResponseImpl(occurrences, pc.getTotalCounter().get(), pc.getTotalKeyCharacterCounter().get());
+    }
+
+    @Override
+    protected CharacterAnalyzer getCharacterAnalyzer() {
+        return characterAnalyzer;
     }
 
     private void storeWord(final ProcessContextOne pc) {

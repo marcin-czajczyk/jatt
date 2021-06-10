@@ -2,9 +2,11 @@ package com.czajczykmarcin.jatt.core.service;
 
 import com.czajczykmarcin.jatt.core.Request;
 import com.czajczykmarcin.jatt.core.Response;
-import com.czajczykmarcin.jatt.core.analyzers.SimpleAsciiFrequencyAnalyzerOne;
-import com.czajczykmarcin.jatt.core.analyzers.SimpleAsciiFrequencyAnalyzerSet;
-import com.czajczykmarcin.jatt.core.helpers.AsciiKeyCharactersHelper;
+import com.czajczykmarcin.jatt.core.analyzers.AsciiCharacterAnalyzer;
+import com.czajczykmarcin.jatt.core.analyzers.StringFrequencyAnalyzerOne;
+import com.czajczykmarcin.jatt.core.analyzers.StringFrequencyAnalyzerSet;
+import com.czajczykmarcin.jatt.core.analyzers.UnicodeCharacterAnalyzer;
+import com.czajczykmarcin.jatt.core.helpers.KeyCharactersHelper;
 import com.czajczykmarcin.jatt.core.response.EmptyResponse;
 import org.apache.commons.lang3.StringUtils;
 
@@ -16,11 +18,23 @@ public class FrequencyAnalyzerService {
 
     //TODO make as constructor or function parameter
     private final ResourceBundle messages = ResourceBundle.getBundle("messages");
-    private final AsciiKeyCharactersHelper keyCharactersHelper = new AsciiKeyCharactersHelper();
-    private final SimpleAsciiFrequencyAnalyzerOne one = new SimpleAsciiFrequencyAnalyzerOne();
-    private final SimpleAsciiFrequencyAnalyzerSet set = new SimpleAsciiFrequencyAnalyzerSet();
+    private final KeyCharactersHelper keyCharactersHelper = new KeyCharactersHelper();
+    private final AsciiCharacterAnalyzer asciiCharacterAnalyzer = new AsciiCharacterAnalyzer();
+    private final UnicodeCharacterAnalyzer unicodeCharacterAnalyzer = new UnicodeCharacterAnalyzer();
+    private final StringFrequencyAnalyzerOne asciiOne = new StringFrequencyAnalyzerOne(asciiCharacterAnalyzer);
+    private final StringFrequencyAnalyzerOne unicodeOne = new StringFrequencyAnalyzerOne(unicodeCharacterAnalyzer);
+    private final StringFrequencyAnalyzerSet asciiSet = new StringFrequencyAnalyzerSet(asciiCharacterAnalyzer);
+    private final StringFrequencyAnalyzerSet unicodeSet = new StringFrequencyAnalyzerSet(unicodeCharacterAnalyzer);
 
-    public Response process(Request<String, String> request) {
+    public Response processAscii(Request<String, String> request) {
+        return process(request, asciiOne, asciiSet);
+    }
+
+    public Response processUnicode(Request<String, String> request) {
+        return process(request, unicodeOne, unicodeSet);
+    }
+
+    private Response process(Request<String, String> request, StringFrequencyAnalyzerOne one, StringFrequencyAnalyzerSet set) {
         validateKeyWord(request.getKeyWord());
         if (StringUtils.isEmpty(request.getInput())) {
             return EmptyResponse.INSTANCE;

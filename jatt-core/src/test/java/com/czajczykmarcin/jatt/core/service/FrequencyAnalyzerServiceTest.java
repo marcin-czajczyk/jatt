@@ -1,4 +1,4 @@
-package com.czajczykmarcin.jatt.core.analyzers;
+package com.czajczykmarcin.jatt.core.service;
 
 import com.czajczykmarcin.jatt.core.Request;
 import com.czajczykmarcin.jatt.core.Response;
@@ -6,18 +6,21 @@ import com.czajczykmarcin.jatt.core.exceptions.IllegalCharacter;
 import com.czajczykmarcin.jatt.core.request.CaseMode;
 import com.czajczykmarcin.jatt.core.request.CharacterOrder;
 import com.czajczykmarcin.jatt.core.request.StringRequest;
-import com.czajczykmarcin.jatt.core.service.FrequencyAnalyzerService;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class SimpleAsciiFrequencyAnalyzerTest {
+public class FrequencyAnalyzerServiceTest {
+
+    @Test
+    public void testProcessAscii() {
+    }
 
     private static final FrequencyAnalyzerService ANALYZER = new FrequencyAnalyzerService();
 
-    @DataProvider(name = "testProcessDP")
-    public Object[][] testProcessDP() {
+    @DataProvider(name = "testProcessAsciiDP")
+    public Object[][] testProcessAsciiDP() {
         return new Object[][] {
                 {new StringRequest("LOGIC", "I love to work in global logic!", CaseMode.LOWERCASE, CharacterOrder.ALPHABET)},
                 {new StringRequest("L", "I love to work in global logic!", CaseMode.LOWERCASE, CharacterOrder.ALPHABET)},
@@ -29,16 +32,15 @@ public class SimpleAsciiFrequencyAnalyzerTest {
         };
     }
 
-    @Test(dataProvider = "testProcessDP")
-    public void testProcess(Request<String, String> request) {
-        Response response = ANALYZER.process(request);
+    @Test(dataProvider = "testProcessAsciiDP")
+    public void testProcessAscii(Request<String, String> request) {
+        Response response = ANALYZER.processAscii(request);
         assertNotNull(response);
         assertNotNull(response.getOccurrences());
     }
 
     @Test(expectedExceptions = IllegalCharacter.class)
-    public void testProcess_IllegalCharacter() {
-        ANALYZER.process(new StringRequest("LOGIC", "I love to work in global logic! Øñɀ˽ΦϾ҉Ӌ", CaseMode.LOWERCASE, CharacterOrder.ALPHABET));
+    public void testProcessAscii_IllegalCharacter() {
+        ANALYZER.processAscii(new StringRequest("LOGIC", "I love to work in global logic! Øñɀ˽ΦϾ҉Ӌ", CaseMode.LOWERCASE, CharacterOrder.ALPHABET));
     }
-
 }

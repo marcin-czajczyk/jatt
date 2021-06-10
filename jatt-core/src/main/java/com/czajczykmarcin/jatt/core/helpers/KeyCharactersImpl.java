@@ -1,6 +1,7 @@
 package com.czajczykmarcin.jatt.core.helpers;
 
 import com.czajczykmarcin.jatt.core.KeyCharacters;
+import com.czajczykmarcin.jatt.core.dto.Counter;
 import com.czajczykmarcin.jatt.core.request.CharacterOrder;
 
 import java.util.Collections;
@@ -12,9 +13,9 @@ import java.util.stream.Collectors;
 import static com.czajczykmarcin.jatt.core.util.CharacterUtil.sort;
 import static java.util.function.Function.identity;
 
-class AsciiKeyCharacters {
+class KeyCharactersImpl {
 
-    private AsciiKeyCharacters() { throw new UnsupportedOperationException("Cannot create AsciiKeyCharacters instance"); }
+    private KeyCharactersImpl() { throw new UnsupportedOperationException("Cannot create KeyCharacters instance"); }
 
     static final class Zero implements KeyCharacters {
 
@@ -71,7 +72,7 @@ class AsciiKeyCharacters {
         }
     }
 
-    static final class Two implements KeyCharacters {
+    static final class Two implements com.czajczykmarcin.jatt.core.KeyCharacters {
 
         private final int value1;
         private final int value2;

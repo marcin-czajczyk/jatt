@@ -1,8 +1,8 @@
 package com.czajczykmarcin.jatt.core.context;
 
 import com.czajczykmarcin.jatt.core.ProcessContext;
-import com.czajczykmarcin.jatt.core.helpers.Counter;
-import com.czajczykmarcin.jatt.core.helpers.Result;
+import com.czajczykmarcin.jatt.core.dto.Counter;
+import com.czajczykmarcin.jatt.core.dto.Result;
 import com.czajczykmarcin.jatt.core.request.CaseMode;
 import lombok.Getter;
 

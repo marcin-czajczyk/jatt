@@ -1,4 +1,4 @@
-package com.czajczykmarcin.jatt.core.helpers;
+package com.czajczykmarcin.jatt.core.dto;
 
 public final class Counter implements Comparable<Counter> {
 

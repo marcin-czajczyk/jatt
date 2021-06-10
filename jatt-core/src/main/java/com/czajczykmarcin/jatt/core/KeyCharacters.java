@@ -1,6 +1,6 @@
 package com.czajczykmarcin.jatt.core;
 
-import com.czajczykmarcin.jatt.core.helpers.Counter;
+import com.czajczykmarcin.jatt.core.dto.Counter;
 
 import java.util.List;
 import java.util.Map;

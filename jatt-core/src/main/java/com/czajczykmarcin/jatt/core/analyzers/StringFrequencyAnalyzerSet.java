@@ -1,10 +1,11 @@
 package com.czajczykmarcin.jatt.core.analyzers;
 
+import com.czajczykmarcin.jatt.core.CharacterAnalyzer;
 import com.czajczykmarcin.jatt.core.KeyCharacters;
 import com.czajczykmarcin.jatt.core.Response;
 import com.czajczykmarcin.jatt.core.context.ProcessContextSet;
-import com.czajczykmarcin.jatt.core.helpers.Counter;
-import com.czajczykmarcin.jatt.core.helpers.Result;
+import com.czajczykmarcin.jatt.core.dto.Counter;
+import com.czajczykmarcin.jatt.core.dto.Result;
 import com.czajczykmarcin.jatt.core.request.CaseMode;
 import com.czajczykmarcin.jatt.core.response.Occurrence;
 import com.czajczykmarcin.jatt.core.response.ResponseImpl;
@@ -14,8 +15,15 @@ import java.util.List;
 import java.util.Map;
 
 import static com.czajczykmarcin.jatt.core.util.CharacterUtil.caseConverter;
+import static java.util.Objects.requireNonNull;
 
-public class SimpleAsciiFrequencyAnalyzerSet extends AsciiFrequencyAnalyzer<ProcessContextSet> {
+public class StringFrequencyAnalyzerSet extends AbstractFrequencyAnalyzer<ProcessContextSet> {
+
+    private final CharacterAnalyzer characterAnalyzer;
+
+    public StringFrequencyAnalyzerSet(CharacterAnalyzer characterAnalyzer) {
+        this.characterAnalyzer = requireNonNull(characterAnalyzer);
+    }
 
     @Override
     protected ProcessContextSet createProcessContext(KeyCharacters keyCharacters, CaseMode caseMode) {
@@ -49,6 +57,11 @@ public class SimpleAsciiFrequencyAnalyzerSet extends AsciiFrequencyAnalyzer<Proc
             processResult(resultByCharacter.get(character), occurrences, sortedCharacters);
         }
         return new ResponseImpl(occurrences, processContext.getTotalCount().get(), processContext.getKeyCharactersTotalCount().get());
+    }
+
+    @Override
+    protected CharacterAnalyzer getCharacterAnalyzer() {
+        return characterAnalyzer;
     }
 
     private void storeWord(final ProcessContextSet processContext) {
