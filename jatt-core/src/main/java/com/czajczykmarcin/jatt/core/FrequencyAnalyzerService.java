@@ -1,8 +1,5 @@
 package com.czajczykmarcin.jatt.core;
 
-import com.czajczykmarcin.jatt.core.Request;
-import com.czajczykmarcin.jatt.core.Response;
-
 import java.io.BufferedReader;
 
 public interface FrequencyAnalyzerService {

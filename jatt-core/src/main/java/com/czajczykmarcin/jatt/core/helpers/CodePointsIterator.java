@@ -5,6 +5,7 @@ import com.czajczykmarcin.jatt.core.exceptions.IORuntimeException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class CodePointsIterator implements Iterator<Integer> {
 
@@ -56,6 +57,9 @@ public class CodePointsIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
+        if (next == null) {
+            throw new NoSuchElementException();
+        }
         return next;
     }
 }
