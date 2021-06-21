@@ -9,12 +9,14 @@ import static com.czajczykmarcin.jatt.cmd.console.ConsoleConstants.DEFAULT_TEXT;
 
 public class Jatt {
 
+    private static final FrequencyAnalyzerService frequencyAnalyzerService = new FrequencyAnalyzerService();
+
     public static void main(String[] args) {
         new ConsoleService(
                 DEFAULT_LOGIC_WORD,
                 DEFAULT_TEXT,
                 args,
-                new FrequencyAnalyzerService(),
+                frequencyAnalyzerService::processAscii,
                 new ConsoleImpl(System.in, System.out)
         )
                 .run();

@@ -12,16 +12,17 @@ import org.apache.commons.collections4.CollectionUtils;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Comparator;
+import java.util.function.Function;
 
 public class ConsoleService {
 
     private final String defaultLogicWord;
     private final String defaultText;
-    private final FrequencyAnalyzerService analyzerService;
+    private final Function<StringRequest, Response> analyzerService;
     private final Console console;
     private final String[] values;
 
-    public ConsoleService(String defaultLogicWord, String defaultText, String[] values, FrequencyAnalyzerService analyzerService, Console console) {
+    public ConsoleService(String defaultLogicWord, String defaultText, String[] values, Function<StringRequest, Response> analyzerService, Console console) {
         this.defaultLogicWord = defaultLogicWord;
         this.defaultText = defaultText;
         this.values = values;
@@ -32,7 +33,7 @@ public class ConsoleService {
     public void run() {
         var logicWord = values.length > 0 ? values[0] : console.readLogicWord(defaultLogicWord);
         var text = values.length > 1 ? values[1] : console.readText(defaultText);
-        var response = analyzerService.processAscii(new StringRequest(logicWord, text, CaseMode.LOWERCASE, CharacterOrder.INPUT));
+        var response = analyzerService.apply(new StringRequest(logicWord, text, CaseMode.LOWERCASE, CharacterOrder.INPUT));
         console.write(toConsoleString(response));
     }
 

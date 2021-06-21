@@ -1,3 +1,6 @@
 /jatt-core/target/
 /.idea/
 /jatt-cmd/target/classes/com/czajczykmarcin/jatt/cmd/
+/jatt.iml
+/jatt-cmd/jatt-cmd.iml
+/jatt-core/jatt-core.iml
