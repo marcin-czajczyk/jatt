@@ -20,19 +20,23 @@ public class ConsoleService {
     private final Function<StringRequest, Response> analyzerService;
     private final Console console;
     private final String[] values;
+    private final CaseMode caseMode;
+    private final CharacterOrder characterOrder;
 
-    public ConsoleService(String defaultLogicWord, String defaultText, String[] values, Function<StringRequest, Response> analyzerService, Console console) {
+    public ConsoleService(String defaultLogicWord, String defaultText, String[] values, Function<StringRequest, Response> analyzerService, Console console, CaseMode caseMode, CharacterOrder characterOrder) {
         this.defaultLogicWord = defaultLogicWord;
         this.defaultText = defaultText;
         this.values = values;
         this.analyzerService = analyzerService;
         this.console = console;
+        this.caseMode = caseMode;
+        this.characterOrder = characterOrder;
     }
 
     public void run() {
         var logicWord = values.length > 0 ? values[0] : console.readLogicWord(defaultLogicWord);
         var text = values.length > 1 ? values[1] : console.readText(defaultText);
-        var response = analyzerService.apply(new StringRequest(logicWord, text, CaseMode.LOWERCASE, CharacterOrder.INPUT));
+        var response = analyzerService.apply(new StringRequest(logicWord, text, caseMode, characterOrder));
         console.write(toConsoleString(response));
     }
 
