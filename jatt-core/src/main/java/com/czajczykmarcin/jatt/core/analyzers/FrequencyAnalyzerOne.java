@@ -10,6 +10,7 @@ import com.czajczykmarcin.jatt.core.request.CaseMode;
 import com.czajczykmarcin.jatt.core.response.Occurrence;
 import com.czajczykmarcin.jatt.core.response.ResponseImpl;
 
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,16 +18,16 @@ import java.util.Map;
 import static com.czajczykmarcin.jatt.core.util.CharacterUtil.caseConverter;
 import static java.util.Objects.requireNonNull;
 
-public class StringFrequencyAnalyzerOne extends AbstractFrequencyAnalyzer<ProcessContextOne> {
+public class FrequencyAnalyzerOne extends AbstractFrequencyAnalyzer<ProcessContextOne> {
 
     private final CharacterAnalyzer characterAnalyzer;
 
-    public StringFrequencyAnalyzerOne(CharacterAnalyzer characterAnalyzer) {
+    public FrequencyAnalyzerOne(CharacterAnalyzer characterAnalyzer) {
         this.characterAnalyzer = requireNonNull(characterAnalyzer);
     }
 
     @Override
-    protected void validate(KeyCharacters keyCharacters, Request<String, String> request) {
+    protected void validate(KeyCharacters keyCharacters, Request<String, BufferedReader> request) {
         if (keyCharacters == null || keyCharacters.size() != 1) {
             throw new UnsupportedKeyCharacters();
         }

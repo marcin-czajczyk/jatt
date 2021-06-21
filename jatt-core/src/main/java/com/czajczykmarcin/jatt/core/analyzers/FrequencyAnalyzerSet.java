@@ -17,11 +17,11 @@ import java.util.Map;
 import static com.czajczykmarcin.jatt.core.util.CharacterUtil.caseConverter;
 import static java.util.Objects.requireNonNull;
 
-public class StringFrequencyAnalyzerSet extends AbstractFrequencyAnalyzer<ProcessContextSet> {
+public class FrequencyAnalyzerSet extends AbstractFrequencyAnalyzer<ProcessContextSet> {
 
     private final CharacterAnalyzer characterAnalyzer;
 
-    public StringFrequencyAnalyzerSet(CharacterAnalyzer characterAnalyzer) {
+    public FrequencyAnalyzerSet(CharacterAnalyzer characterAnalyzer) {
         this.characterAnalyzer = requireNonNull(characterAnalyzer);
     }
 

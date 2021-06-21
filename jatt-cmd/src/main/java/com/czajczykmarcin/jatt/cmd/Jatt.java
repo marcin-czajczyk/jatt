@@ -3,13 +3,14 @@ package com.czajczykmarcin.jatt.cmd;
 import com.czajczykmarcin.jatt.cmd.console.ConsoleImpl;
 import com.czajczykmarcin.jatt.cmd.console.ConsoleService;
 import com.czajczykmarcin.jatt.core.service.FrequencyAnalyzerService;
+import com.czajczykmarcin.jatt.core.service.impl.FrequencyAnalyzerServiceImpl;
 
 import static com.czajczykmarcin.jatt.cmd.console.ConsoleConstants.DEFAULT_LOGIC_WORD;
 import static com.czajczykmarcin.jatt.cmd.console.ConsoleConstants.DEFAULT_TEXT;
 
 public class Jatt {
 
-    private static final FrequencyAnalyzerService frequencyAnalyzerService = new FrequencyAnalyzerService();
+    private static final FrequencyAnalyzerService frequencyAnalyzerService = new FrequencyAnalyzerServiceImpl();
 
     public static void main(String[] args) {
         new ConsoleService(

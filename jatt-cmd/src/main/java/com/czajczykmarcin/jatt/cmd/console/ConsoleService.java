@@ -6,7 +6,6 @@ import com.czajczykmarcin.jatt.core.request.CaseMode;
 import com.czajczykmarcin.jatt.core.request.CharacterOrder;
 import com.czajczykmarcin.jatt.core.request.StringRequest;
 import com.czajczykmarcin.jatt.core.response.Occurrence;
-import com.czajczykmarcin.jatt.core.service.FrequencyAnalyzerService;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.math.BigDecimal;

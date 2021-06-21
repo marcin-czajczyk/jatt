@@ -6,18 +6,19 @@ import com.czajczykmarcin.jatt.core.exceptions.IllegalCharacter;
 import com.czajczykmarcin.jatt.core.request.CaseMode;
 import com.czajczykmarcin.jatt.core.request.CharacterOrder;
 import com.czajczykmarcin.jatt.core.request.StringRequest;
+import com.czajczykmarcin.jatt.core.service.impl.FrequencyAnalyzerServiceImpl;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class FrequencyAnalyzerServiceTest {
+public class FrequencyAnalyzerServiceImplTest {
 
     @Test
     public void testProcessAscii() {
     }
 
-    private static final FrequencyAnalyzerService ANALYZER = new FrequencyAnalyzerService();
+    private static final FrequencyAnalyzerServiceImpl ANALYZER = new FrequencyAnalyzerServiceImpl();
 
     @DataProvider(name = "testProcessAsciiDP")
     public Object[][] testProcessAsciiDP() {
