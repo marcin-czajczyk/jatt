@@ -6,7 +6,6 @@ import com.czajczykmarcin.jatt.core.exceptions.IllegalCharacter;
 import com.czajczykmarcin.jatt.core.request.CaseMode;
 import com.czajczykmarcin.jatt.core.request.CharacterOrder;
 import com.czajczykmarcin.jatt.core.request.StringRequest;
-import com.czajczykmarcin.jatt.core.service.impl.FrequencyAnalyzerServiceImpl;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

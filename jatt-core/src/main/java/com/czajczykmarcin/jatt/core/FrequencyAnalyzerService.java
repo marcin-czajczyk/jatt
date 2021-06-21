@@ -1,4 +1,4 @@
-package com.czajczykmarcin.jatt.core.service;
+package com.czajczykmarcin.jatt.core;
 
 import com.czajczykmarcin.jatt.core.Request;
 import com.czajczykmarcin.jatt.core.Response;

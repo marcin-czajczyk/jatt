@@ -1,4 +1,4 @@
-package com.czajczykmarcin.jatt.core.service.impl;
+package com.czajczykmarcin.jatt.core.service;
 
 import com.czajczykmarcin.jatt.core.Request;
 import com.czajczykmarcin.jatt.core.Response;
@@ -9,7 +9,7 @@ import com.czajczykmarcin.jatt.core.analyzers.UnicodeCharacterAnalyzer;
 import com.czajczykmarcin.jatt.core.helpers.KeyCharactersHelper;
 import com.czajczykmarcin.jatt.core.request.BufferReaderRequest;
 import com.czajczykmarcin.jatt.core.response.EmptyResponse;
-import com.czajczykmarcin.jatt.core.service.FrequencyAnalyzerService;
+import com.czajczykmarcin.jatt.core.FrequencyAnalyzerService;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
