@@ -4,6 +4,7 @@ import com.czajczykmarcin.jatt.core.exceptions.IORuntimeException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -13,8 +14,13 @@ public class CodePointsIterator implements Iterator<Integer> {
     private Integer next;
     private Integer nextNext;
 
-    public CodePointsIterator(BufferedReader input) {
-        this.input = input;
+    public CodePointsIterator(Reader input) {
+        if (input instanceof BufferedReader) {
+            this.input = (BufferedReader) input;
+        }
+        else {
+            this.input = new BufferedReader(input);
+        }
     }
 
     @Override

@@ -4,20 +4,20 @@ import com.czajczykmarcin.jatt.core.Request;
 import lombok.Getter;
 
 import java.io.BufferedReader;
+import java.io.Reader;
 
 @Getter
-public class BufferReaderRequest implements Request<String, BufferedReader> {
+public class ReaderRequest implements Request<String, Reader> {
 
     private final String keyWord;
-    private final BufferedReader input;
+    private final Reader input;
     private final CaseMode caseMode;
     private final CharacterOrder characterOrder;
 
-    public BufferReaderRequest(String keyWord, BufferedReader input, CaseMode caseMode, CharacterOrder characterOrder) {
+    public ReaderRequest(String keyWord, Reader input, CaseMode caseMode, CharacterOrder characterOrder) {
         this.keyWord = keyWord;
         this.input = input;
         this.caseMode = caseMode;
         this.characterOrder = characterOrder;
-
     }
 }

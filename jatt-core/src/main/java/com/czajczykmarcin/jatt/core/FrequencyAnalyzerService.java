@@ -1,6 +1,6 @@
 package com.czajczykmarcin.jatt.core;
 
-import java.io.BufferedReader;
+import java.io.Reader;
 
 public interface FrequencyAnalyzerService {
 
@@ -8,5 +8,5 @@ public interface FrequencyAnalyzerService {
 
     Response processUnicode(Request<String, String> request);
 
-    Response processUnicodeReader(Request<String, BufferedReader> request);
+    Response processUnicodeReader(Request<String, Reader> request);
 }

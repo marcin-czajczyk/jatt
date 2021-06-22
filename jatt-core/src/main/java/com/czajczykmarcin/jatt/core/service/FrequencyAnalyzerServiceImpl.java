@@ -7,12 +7,13 @@ import com.czajczykmarcin.jatt.core.analyzers.FrequencyAnalyzerOne;
 import com.czajczykmarcin.jatt.core.analyzers.FrequencyAnalyzerSet;
 import com.czajczykmarcin.jatt.core.analyzers.UnicodeCharacterAnalyzer;
 import com.czajczykmarcin.jatt.core.helpers.KeyCharactersHelper;
-import com.czajczykmarcin.jatt.core.request.BufferReaderRequest;
+import com.czajczykmarcin.jatt.core.request.ReaderRequest;
 import com.czajczykmarcin.jatt.core.response.EmptyResponse;
 import com.czajczykmarcin.jatt.core.FrequencyAnalyzerService;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
+import java.io.Reader;
 import java.io.StringReader;
 import java.util.ResourceBundle;
 
@@ -41,7 +42,7 @@ public class FrequencyAnalyzerServiceImpl implements FrequencyAnalyzerService {
     }
 
     @Override
-    public Response processUnicodeReader(Request<String, BufferedReader> request) {
+    public Response processUnicodeReader(Request<String, Reader> request) {
         return processReader(request, unicodeOne, unicodeSet);
     }
 
@@ -49,11 +50,11 @@ public class FrequencyAnalyzerServiceImpl implements FrequencyAnalyzerService {
         if (StringUtils.isEmpty(request.getInput())) {
             return EmptyResponse.INSTANCE;
         }
-        return processReader(toBufferedReaderRequest(request), one, set);
+        return processReader(toReaderRequest(request), one, set);
     }
 
 
-    private Response processReader(Request<String, BufferedReader> request, FrequencyAnalyzerOne one, FrequencyAnalyzerSet set) {
+    private Response processReader(Request<String, Reader> request, FrequencyAnalyzerOne one, FrequencyAnalyzerSet set) {
         validateKeyWord(request.getKeyWord());
         var keyCharacters = keyCharactersHelper.create(request.getKeyWord(), request.getCaseMode(), request.getCharacterOrder());
         if (keyCharacters.size() == 1) {
@@ -68,8 +69,8 @@ public class FrequencyAnalyzerServiceImpl implements FrequencyAnalyzerService {
         }
     }
 
-    private Request<String, BufferedReader> toBufferedReaderRequest(Request<String, String> request) {
-        return new BufferReaderRequest(
+    private Request<String, Reader> toReaderRequest(Request<String, String> request) {
+        return new ReaderRequest(
                 request.getKeyWord(),
                 new BufferedReader(new StringReader(request.getInput())),
                 request.getCaseMode(),

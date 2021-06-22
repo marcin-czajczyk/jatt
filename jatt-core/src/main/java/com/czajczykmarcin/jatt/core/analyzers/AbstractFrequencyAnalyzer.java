@@ -5,14 +5,15 @@ import com.czajczykmarcin.jatt.core.helpers.CodePointsIterator;
 import com.czajczykmarcin.jatt.core.request.CaseMode;
 
 import java.io.BufferedReader;
+import java.io.Reader;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.stream.StreamSupport;
 
-public abstract class AbstractFrequencyAnalyzer<P extends ProcessContext> implements FrequencyAnalyzer<Request<String, BufferedReader>> {
+public abstract class AbstractFrequencyAnalyzer<P extends ProcessContext> implements FrequencyAnalyzer<Request<String, Reader>> {
 
     @Override
-    public Response analyse(final KeyCharacters keyCharacters, final Request<String, BufferedReader> request) {
+    public Response analyse(final KeyCharacters keyCharacters, final Request<String, Reader> request) {
         validate(keyCharacters, request);
         var processContext = createProcessContext(keyCharacters, request.getCaseMode());
 
@@ -23,7 +24,7 @@ public abstract class AbstractFrequencyAnalyzer<P extends ProcessContext> implem
         return createResponse(processContext);
     }
 
-    protected void validate(KeyCharacters keyCharacters, Request<String, BufferedReader> request) {
+    protected void validate(KeyCharacters keyCharacters, Request<String, Reader> request) {
     }
 
     protected abstract P createProcessContext(final KeyCharacters keyCharacters, CaseMode caseMode);
