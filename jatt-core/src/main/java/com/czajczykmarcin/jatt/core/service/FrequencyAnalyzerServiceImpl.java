@@ -70,6 +70,7 @@ public class FrequencyAnalyzerServiceImpl implements FrequencyAnalyzerService {
     }
 
     private Request<String, Reader> toReaderRequest(Request<String, String> request) {
+        //TODO maybe it is better to use String methods?
         return new ReaderRequest(
                 request.getKeyWord(),
                 new BufferedReader(new StringReader(request.getInput())),

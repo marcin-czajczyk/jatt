@@ -10,7 +10,7 @@ import com.czajczykmarcin.jatt.core.request.CaseMode;
 import com.czajczykmarcin.jatt.core.response.Occurrence;
 import com.czajczykmarcin.jatt.core.response.ResponseImpl;
 
-import java.io.BufferedReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class FrequencyAnalyzerOne extends AbstractFrequencyAnalyzer<ProcessConte
     }
 
     @Override
-    protected void validate(KeyCharacters keyCharacters, Request<String, BufferedReader> request) {
+    protected void validate(KeyCharacters keyCharacters, Request<String, Reader> request) {
         if (keyCharacters == null || keyCharacters.size() != 1) {
             throw new UnsupportedKeyCharacters();
         }
